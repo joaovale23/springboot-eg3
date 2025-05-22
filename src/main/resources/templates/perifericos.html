@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <h1>Lista de Perifericos</h1>
+   <hr>
+   <table>
+       <thead>
+         <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+             <th>Cor</th>
+             <th>Marca</th>
+             <th>Preço</th>
+             <th>Peso</th>
+       </tr>
+       </thead>
+       <tbody>
+        <tr th:each="periferico : ${perifericos}">
+            <td th:text="${periferico.nome}"></td>
+            <td th:text="${periferico.descricao}"></td>
+            <td th:text="${periferico.cor}"></td>
+            <td th:text="${periferico.marca}"></td>
+            <td th:text="${periferico.preco}"></td>
+            <td th:text="${periferico.peso}"></td>
+        </tr>
+       </tbody>
+   </table>
+<hr>
+</body>
+</html>
