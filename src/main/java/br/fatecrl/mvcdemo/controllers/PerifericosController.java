@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PerifericosController {
@@ -17,8 +15,17 @@ public class PerifericosController {
     private PerifericosRepository perifericosRepository;
 
     @GetMapping("/perifericos")
-    public String listarPerifericos(Model model) {
-        model.addAttribute("perifericos", perifericosRepository.findAll());
+    public String listarPerifericos(@RequestParam(required = false) String nome, Model model) {
+        Iterable<Perifericos> perifericos;
+        if (nome != null && !nome.isEmpty()) {
+            perifericos = perifericosRepository.findAll()
+                .stream()
+                .filter(p -> p.getNome().toLowerCase().contains(nome.toLowerCase()))
+                .toList();
+        } else {
+            perifericos = perifericosRepository.findAll();
+        }
+        model.addAttribute("perifericos", perifericos);
         return "perifericos";
     }
 

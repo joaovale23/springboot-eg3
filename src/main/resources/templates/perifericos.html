@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-   <h1>Lista de Perifericos</h1>
-   <hr>
-   <table>
-       <thead>
-         <tr>
-              <th>Nome</th>
-              <th>Descrição</th>
-             <th>Cor</th>
-             <th>Marca</th>
-             <th>Preço</th>
-             <th>Peso</th>
-       </tr>
-       </thead>
-       <tbody>
-        <tr th:each="periferico : ${perifericos}">
-            <td th:text="${periferico.nome}"></td>
-            <td th:text="${periferico.descricao}"></td>
-            <td th:text="${periferico.cor}"></td>
-            <td th:text="${periferico.marca}"></td>
-            <td th:text="${periferico.preco}"></td>
-            <td th:text="${periferico.peso}"></td>
-        </tr>
-       </tbody>
-   </table>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <form style="display: flex; justify-content: center; align-items: center; flex-direction: row; flex-flow: row;" method="get" th:action="@{/perifericos}">
+            <input 
+                style="border-radius: 10px; background-color: #ccc;"
+                type="text" 
+                name="nome" 
+                placeholder="Pesquisar por nome"
+            />
+            <button
+                style="border-radius: 50%; border: none; padding: 1%;"
+                type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
 <hr>
+<div th:each="periferico : ${perifericos}">
+    <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+        <h3 th:text="${periferico.nome}"></h3>
+        <img th:src="@{${periferico.imagem}}" alt="Imagem" width="80"/>
+        <p><b>Descrição:</b> <span th:text="${periferico.descricao}"></span></p>
+        <p><b>Cor:</b> <span th:text="${periferico.cor}"></span></p>
+        <p><b>Marca:</b> <span th:text="${periferico.marca}"></span></p>
+        <p><b>Preço:</b> <span th:text="${periferico.preco}"></span></p>
+        <p><b>Peso:</b> <span th:text="${periferico.peso}"></span></p>
+    </div>
+</div>
 </body>
 </html>
